@@ -1,0 +1,57 @@
+<app-home-page></app-home-page>
+<div class="centered-container">
+    <h1 class = "mt-3 mb-3">Hotels</h1>
+    <mat-card class="example-card" *ngFor = "let tempHotel of hotels">
+        <mat-card-header>
+            <mat-card-title>{{tempHotel.name}}</mat-card-title>
+        </mat-card-header>
+    <mat-card-content>
+
+      <table class="table">
+
+        <thead>
+            <tr>
+                <th>RoomNumber</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>Book</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor = "let tempRoom of tempHotel.roomEntities">
+                <td>{{tempRoom.roomNumber}}</td>
+                <td>{{tempRoom.type}}</td>
+                <td>{{tempRoom.price}}</td>
+                <td>{{tempRoom.isAvailable}}</td>
+                <td>
+                    <button class="btn btn-red" type="button"(click)='bookRoom(tempRoom)'>Book</button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+      <h4>Reviews</h4>
+      <thead>
+        <th>Username</th>
+        <th>Review</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tempReview of tempHotel.reviewEntities">
+        <td>{{tempReview.user?.username}}</td>
+        <td>{{tempReview.description}}</td> 
+      </tr>
+    </tbody>
+      <br>
+      <form cForm #gfg = "ngForm">
+      <p class="centered-form">
+          <mat-form-field appearance="outline">
+            <input name="review" type="text" matInput placeholder="Review" ngModel>
+        </mat-form-field>
+          <button mat-flat-button color="primary"(click)="createReview(gfg.value['review'], tempHotel.id)">Submit Review</button>
+      </p>
+    </form>
+    </mat-card-content>
+  </mat-card>
+</div>
